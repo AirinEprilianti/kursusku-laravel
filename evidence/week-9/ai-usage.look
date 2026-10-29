@@ -1,0 +1,90 @@
+# AI Usage Log --- KursusKu
+
+**Mata kuliah:** Pemrograman Web III\
+**Praktikum:** Pertemuan 9 --- Laravel Layout, Bootstrap, jQuery Ajax &
+Form\
+**Tanggal:** 29 Oktober 2026\
+**Project:** KursusKu
+
+## 1. Tujuan Penggunaan AI
+
+AI digunakan sebagai asisten untuk memahami panduan praktikum Pertemuan
+9 dan menyusun dokumentasi penggunaan AI pada proyek Laravel KursusKu.
+AI bukan pengganti proses pengerjaan, pengujian, dan pemahaman kode oleh
+mahasiswa.
+
+## 2. Alat AI yang Digunakan
+
+-   **ChatGPT (OpenAI):** membantu merangkum kebutuhan praktikum dan
+    menyusun berkas dokumentasi `ai-usage-log.md` berdasarkan Panduan
+    Praktikum Pertemuan 9 yang diberikan.
+
+## 3. Bagian yang Dibantu AI
+
+Berdasarkan panduan praktikum, bantuan AI mencakup penyusunan catatan
+mengenai pekerjaan berikut:
+
+-   Menyiapkan Bootstrap, Popper, dan jQuery melalui npm.
+-   Menghubungkan aset CSS dan JavaScript menggunakan Vite.
+-   Membuat master layout Blade dan partial navbar.
+-   Menyesuaikan halaman beranda agar menggunakan layout.
+-   Menyusun form pendaftaran Blade dengan direktif `@csrf`.
+-   Memahami route JSON dummy untuk memeriksa ketersediaan kursus.
+-   Memahami penggunaan jQuery Ajax agar informasi sisa kursi diperbarui
+    tanpa memuat ulang halaman.
+-   Menyiapkan daftar pemeriksaan untuk pengujian dan dokumentasi.
+
+**Catatan:** Daftar di atas merujuk pada cakupan panduan praktikum.
+Daftar ini tidak menyatakan bahwa seluruh fitur telah selesai
+diimplementasikan atau berhasil diuji.
+
+## 4. Contoh Permintaan kepada AI
+
+Permintaan yang digunakan dalam percakapan ini:
+
+> Berdasarkan Panduan Praktikum Pertemuan 9, buatkan berkas
+> `ai-usage-log.md` untuk proyek KursusKu.
+
+AI diminta menyusun dokumentasi awal yang sesuai dengan topik dan
+istilah pada panduan praktikum.
+
+## 5. Hasil dari AI
+
+AI membantu membuat draf dokumentasi yang memuat:
+
+-   identitas praktikum dan proyek;
+-   tujuan penggunaan AI;
+-   alat AI yang digunakan;
+-   bagian praktikum yang menjadi konteks bantuan;
+-   contoh permintaan kepada AI; dan
+-   hal-hal yang perlu diperiksa kembali oleh mahasiswa.
+
+## 6. Pemeriksaan dan Tanggung Jawab Mahasiswa
+
+Sebelum berkas ini dikumpulkan, mahasiswa perlu:
+
+1.  Memastikan isi log sesuai dengan bantuan AI yang benar-benar
+    digunakan.
+2.  Menghapus atau mengubah bagian yang tidak sesuai dengan pekerjaan
+    yang dilakukan.
+3.  Menguji kode secara mandiri di proyek Laravel KursusKu.
+4.  Memastikan `npm run dev` berjalan dan halaman dapat dibuka.
+5.  Menguji form, validasi, route JSON, serta perubahan sisa kursi tanpa
+    reload.
+6.  Memeriksa tab **Network** pada Developer Tools untuk memastikan
+    request availability berhasil dan respons JSON sesuai.
+7.  Menambahkan bukti atau catatan hasil pengujian yang benar-benar
+    diperoleh, jika diperlukan oleh dosen.
+
+## 7. Batasan
+
+AI membantu menyusun penjelasan dan dokumentasi, tetapi tidak dapat
+memastikan bahwa kode pada komputer mahasiswa telah berjalan dengan
+benar. Keberhasilan implementasi harus ditentukan melalui pengujian
+langsung pada proyek.
+
+## 8. Pernyataan
+
+Dokumen ini merupakan draf catatan penggunaan AI. Mahasiswa bertanggung
+jawab meninjau, memperbaiki, dan memastikan bahwa isinya menggambarkan
+penggunaan AI serta pekerjaan yang benar-benar dilakukan.

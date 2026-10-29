@@ -1,176 +1,295 @@
-<!doctype html>
-<html lang="id">
+@extends('layouts.app')
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+@section('title', 'Beranda - KursusKu')
 
-    <title>{{ $siteName }} - Belajar Web</title>
+@section('content')
 
-    <!-- CSS utama -->
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+<style>
+    /* ==================================
+       KURSUSKU - PURPLE THEME
+    ================================== */
 
-    <!-- CSS tambahan untuk gambar dan HERO -->
-    <style>
-        /* HERO: tulisan kiri dan gambar kanan */
-        .hero .hero-content {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: space-between;
-            gap: 45px;
+    :root {
+        --primary: #7c3aed;
+        --primary-dark: #5b21b6;
+        --primary-light: #ede9fe;
+        --background: #f8f7fc;
+        --text: #2e2147;
+        --muted: #746b85;
+        --border: #e8e1f3;
+    }
+
+    body {
+        background: var(--background);
+        color: var(--text);
+        font-family: Arial, sans-serif;
+    }
+
+    /* CONTAINER */
+
+    .hero-section .container,
+    .course-section .container {
+        width: min(1120px, 90%);
+        max-width: 1120px;
+        margin: 0 auto;
+    }
+
+    /* HERO */
+
+    .hero-section {
+        padding: 55px 0 !important;
+        background: linear-gradient(
+            110deg,
+            #f3e8ff 0%,
+            #faf7ff 60%,
+            #ffffff 100%
+        );
+    }
+
+    .hero-section .row {
+        align-items: center;
+    }
+
+    .hero-badge {
+        display: inline-block;
+        padding: 8px 14px;
+        color: var(--primary-dark);
+        background: var(--primary-light);
+        border: 1px solid #e4d7ff;
+        border-radius: 30px;
+        font-size: 12px;
+        font-weight: 700;
+    }
+
+    .hero-section h1 {
+        margin-top: 12px;
+        color: #291452;
+        font-size: clamp(30px, 3.5vw, 42px);
+        font-weight: 800;
+        line-height: 1.25;
+    }
+
+    .hero-section p {
+        color: var(--muted) !important;
+        font-size: 14px;
+        line-height: 1.9;
+    }
+
+    /* TOMBOL UNGU */
+
+    .hero-section .btn-primary {
+        padding: 12px 20px;
+        color: #ffffff !important;
+        background: linear-gradient(
+            120deg,
+            #7c3aed,
+            #8b5cf6
+        ) !important;
+        border: none !important;
+        border-radius: 9px;
+        font-size: 13px;
+        font-weight: 700;
+        box-shadow: 0 7px 18px rgba(124, 58, 237, 0.2);
+        transition: 0.25s;
+    }
+
+    .hero-section .btn-primary:hover {
+        background: var(--primary-dark) !important;
+        transform: translateY(-2px);
+    }
+
+    /* GAMBAR HERO */
+
+    .hero-image-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .hero-image {
+        display: block;
+        width: 100%;
+        max-width: 330px;
+        height: 245px;
+        padding: 12px;
+        margin: auto;
+        object-fit: contain;
+        background: #ffffff;
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        box-shadow: 0 15px 35px rgba(124, 58, 237, 0.13);
+    }
+
+    /* DAFTAR KURSUS */
+
+    .course-section {
+        padding: 45px 0 !important;
+        background: var(--background);
+    }
+
+    .course-section h2 {
+        margin-bottom: 25px !important;
+        color: #291452;
+        font-size: 27px;
+        font-weight: 800;
+    }
+
+    /* KARTU KURSUS */
+
+    .course-card {
+        height: 100%;
+        background: #ffffff;
+        border: 1px solid var(--border) !important;
+        border-radius: 15px !important;
+        box-shadow: 0 8px 25px rgba(91, 33, 182, 0.05);
+        transition: 0.25s;
+    }
+
+    .course-card:hover {
+        border-color: #c4b5fd !important;
+        box-shadow: 0 14px 30px rgba(91, 33, 182, 0.12);
+        transform: translateY(-4px);
+    }
+
+    .course-card .card-body {
+        padding: 22px;
+    }
+
+    .course-code {
+        display: inline-block;
+        padding: 6px 10px;
+        color: var(--primary-dark);
+        background: var(--primary-light);
+        border-radius: 6px;
+        font-size: 11px;
+        font-weight: 800;
+    }
+
+    .course-card h3 {
+        color: #291452;
+        font-weight: 800;
+    }
+
+    .course-card p {
+        color: var(--muted) !important;
+        font-size: 13px;
+        line-height: 1.8;
+    }
+
+    /* NAVBAR JIKA MENGGUNAKAN BOOTSTRAP */
+
+    .navbar {
+        background: #ffffff !important;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .navbar .navbar-brand {
+        color: var(--primary) !important;
+        font-weight: 800;
+    }
+
+    .navbar .nav-link {
+        color: var(--text) !important;
+        font-weight: 600;
+    }
+
+    .navbar .nav-link:hover {
+        color: var(--primary) !important;
+    }
+
+    /* RESPONSIVE */
+
+    @media (max-width: 767px) {
+        .hero-section {
+            padding: 35px 0 !important;
         }
 
-        .hero-text {
-            flex: 1;
-            min-width: 0;
+        .hero-section h1 {
+            font-size: 30px;
         }
 
         .hero-image {
-            flex: 1;
-            min-width: 0;
+            max-width: 100%;
+            height: 230px;
         }
 
-        .hero-image img {
-            display: block;
-            width: 100%;
-            max-width: 480px;
-            height: 340px;
-            margin-left: auto;
-            object-fit: cover;
-            border: 7px solid #ffffff;
-            border-radius: 25px;
-            box-shadow: 0 20px 45px rgba(124, 58, 237, 0.15);
+        .course-section h2 {
+            font-size: 23px;
         }
+    }
+</style>
 
-        .hero h1 span {
-            display: block;
-            color: #7c3aed;
-        }
+{{-- BAGIAN UTAMA --}}
+<section class="hero-section py-4">
+    <div class="container">
+        <div class="row align-items-center g-4">
 
-        /* Tampilan layar HP */
-        @media (max-width: 760px) {
-            .hero .hero-content {
-                flex-direction: column;
-                align-items: stretch;
-                gap: 30px;
-            }
+            <div class="col-lg-8">
+                <span class="hero-badge mb-3">
+                    ✨ Kursus teknologi untuk mahasiswa
+                </span>
 
-            .hero-image img {
-                max-width: 100%;
-                height: auto;
-                margin: 0 auto;
-            }
-        }
-    </style>
-</head>
+                <h1 class="display-5 fw-bold">
+                    Bangun kemampuan web dari PHP sampai Laravel.
+                </h1>
 
-<body>
+                <p class="lead text-secondary mt-3">
+                    KursusKu menyediakan latihan terarah untuk pemula.
+                    Pilih kursus, pelajari materi, dan kembangkan
+                    keterampilan pemrograman web secara bertahap.
+                </p>
 
-    <!-- NAVBAR -->
-    <header class="navbar">
-        <div class="container">
-            <strong>{{ $siteName }}</strong>
-
-            <nav>
-                <a href="{{ route('home') }}">Beranda</a>
-                <a href="#kursus">Kursus</a>
-            </nav>
-        </div>
-    </header>
-
-    <main>
-
-        <!-- HERO -->
-        <section class="hero">
-            <div class="container hero-content">
-
-                <!-- TULISAN DI SEBELAH KIRI -->
-                <div class="hero-text">
-
-                    <span class="badge">
-                        ✨ Platform Belajar Web
-                    </span>
-
-                    <h1>
-                        Tingkatkan Skill Digitalmu,
-                        <span>Mulai dari Sini.</span>
-                    </h1>
-
-                    <p>
-                        Belajar HTML, CSS, PHP, dan Laravel melalui
-                        kursus yang terarah. Bangun keterampilanmu
-                        selangkah demi selangkah bersama KursusKu.
-                    </p>
-
-                    <a href="#kursus" class="btn">
-                        Jelajahi Kursus &rarr;
-                    </a>
-
-                </div>
-
-                <!-- GAMBAR DI SEBELAH KANAN -->
-                <div class="hero-image">
-                    <img
-                        src="{{ asset('images/hero-kursusku.jpg') }}"
-                        alt="Ilustrasi kelas KursusKu">
-                </div>
-
+                <a href="{{ route('enrollments.create') }}"
+                   class="btn btn-primary mt-2">
+                    Daftar Kursus
+                </a>
             </div>
-        </section>
 
-        <!-- DAFTAR KURSUS -->
-        <section class="courses" id="kursus">
-            <div class="container">
+            <div class="col-lg-4 hero-image-container">
+                <img
+                    src="{{ asset('images/hero-kursusku.jpg') }}"
+                    alt="Ilustrasi kelas KursusKu"
+                    class="hero-image"
+                >
+            </div>
 
-                <div class="section-heading">
-                    <p class="eyebrow">Pilihan Belajar</p>
+        </div>
+    </div>
+</section>
 
-                    <h2>Kursus Pilihan untuk Kamu</h2>
+{{-- DAFTAR KURSUS --}}
+<section class="course-section py-4">
+    <div class="container">
 
-                    <p>
-                        Pilih kursus yang sesuai dengan kebutuhan
-                        dan tingkat kemampuanmu.
-                    </p>
-                </div>
+        <h2 class="fw-bold mb-4">
+            Program Belajar Unggulan
+        </h2>
 
-                <div class="course-grid">
+        <div class="row g-4">
+            @foreach ($featured as $course)
+                <div class="col-md-6">
+                    <article class="card course-card h-100">
+                        <div class="card-body">
 
-                    @foreach ($featured as $course)
-                        <article class="card">
-
-                            <span class="course-code">
+                            <small class="course-code">
                                 {{ $course['code'] }}
-                            </span>
+                            </small>
 
-                            <h3>
+                            <h3 class="h5 mt-3">
                                 {{ $course['name'] }}
                             </h3>
 
-                            <p>
+                            <p class="text-secondary mb-0">
                                 {{ $course['description'] }}
                             </p>
 
-                            <a href="#kursus" class="course-link">
-                                Pelajari lebih lanjut &rarr;
-                            </a>
-
-                        </article>
-                    @endforeach
-
+                        </div>
+                    </article>
                 </div>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- FOOTER -->
-    <footer class="footer">
-        <div class="container">
-            &copy; {{ date('Y') }} {{ $siteName }}.
-            Belajar, berkembang, dan raih masa depanmu.
+            @endforeach
         </div>
-    </footer>
 
-</body>
-</html>
+    </div>
+</section>
+
+@endsection

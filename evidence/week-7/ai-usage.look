@@ -1,0 +1,15 @@
+
+| Waktu | Masalah/tujuan | Prompt singkat | Apa yang Anda terima/tolak? |
+|---|---|---|---|
+| 29 Okt 2026 | Memastikan apa saja yang harus dikumpulkan dari panduan praktikum | "Apa aja yang dikumpulkan di file ini?" | **Diterima:** ringkasan format pengumpulan (source project, evidence, penamaan, refleksi). **Dicek ulang:** saya cocokkan dengan bagian 20 dan Milestone 7 di panduan. |
+| 29 Okt 2026 | Memahami maksud file `request-lifecycle` pada evidence | "Diagram alur ini apa yang di-ss?" | **Diterima:** penjelasan bahwa itu diagram buatan sendiri, bukan screenshot aplikasi. **Ditolak:** tidak memakai opsi gambar tangan, saya pilih diagram digital. |
+| 29 Okt 2026 | Membuat diagram request lifecycle yang rapi | "Buatkan gambar yang bagus dari diagram ini" | **Diterima:** alur Browser, Route, HomeController, Blade, Browser. **Saya cek:** urutan alur sesuai bagian 12 panduan dan bisa saya jelaskan tanpa membaca kode. |
+| 29 Okt 2026 | Mendapatkan diagram dalam bentuk file PNG untuk evidence | "Buatkan saya ini" | **Diterima:** file `request-lifecycle.png`. |
+| 29 Okt 2026 | Membuat template AI usage log | "Buatkan AI usage log" | **Diterima:** format tabel. **Saya ubah:** nama, NIM, dan tambahan baris sesuai penggunaan AI saya yang sebenarnya. |
+| ______ | (isi jika ada, misalnya debugging error) | "______" | **Diterima:** ______ **Ditolak:** ______ |
+
+## Catatan Penggunaan
+
+- AI saya pakai untuk memahami panduan dan membuat diagram, **bukan** untuk membuat seluruh aplikasi Laravel.
+- Kode Route, Controller, dan Blade saya tulis dan uji sendiri, lalu saya jelaskan kembali dengan kata-kata sendiri.
+- Saya dapat menjelaskan alur Browser -> Route -> HomeController -> Blade -> HTML response tanpa membuka AI.

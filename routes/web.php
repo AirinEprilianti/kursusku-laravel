@@ -1,7 +1,7 @@
-
 <?php
 
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CourseController;
+use Illuminate\Http\Request;
 use App\Http\Controllers\HomeController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -53,4 +53,7 @@ Route::get('/courses/{course}/availability', function (int $course) {
     abort_unless(isset($availability[$course]), 404);
 
     return response()->json($availability[$course]);
+   
 })->name('courses.availability');
+
+Route::resource('courses', CourseController::class);

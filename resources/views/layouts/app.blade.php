@@ -92,10 +92,46 @@
     .availability-box {
         border-radius: 10px;
     }
+    .kn-nav {
+    background: linear-gradient(100deg, #5b21b6, #7c3aed);
+    width: 100%;
+}
+.kn-inner {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.kn-brand {
+    color: #fff;
+    font-size: 1.3rem;
+    font-weight: 800;
+    text-decoration: none;
+}
+.kn-links { display: flex; gap: 1.5rem; }
+.kn-links a {
+    color: #fff;
+    font-weight: 600;
+    text-decoration: none;
+}
+.kn-links a:hover { text-decoration: underline; }
+.kn-links a.kn-active { text-decoration: underline; text-underline-offset: 6px; }
 </style>
 </head>
 <body>
-    @include('partials.navbar')
+    <header class="kn-nav">
+    <div class="kn-inner">
+        <a class="kn-brand" href="{{ route('home') }}">KursusKu</a>
+        <div class="kn-links">
+            <a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'kn-active' : '' }}">Beranda</a>
+            <a href="{{ route('courses.index') }}" class="{{ request()->routeIs('courses.*') ? 'kn-active' : '' }}">Courses</a>
+            <a href="{{ route('enrollments.create') }}" class="{{ request()->routeIs('enrollments.*') ? 'kn-active' : '' }}">Pendaftaran</a>
+        </div>
+    </div>
+</header>
 
     <main class="container py-4">
         @if (session('success'))

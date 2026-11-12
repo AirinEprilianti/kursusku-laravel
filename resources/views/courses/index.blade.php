@@ -1,3 +1,4 @@
+
 @extends('layouts.app')
 
 @section('title', 'Daftar Kursus')
@@ -68,6 +69,35 @@
     .kl-draft  { background: #fef3c7; color: #92400e; }
     .kl-closed { background: #fee2e2; color: #991b1b; }
     .kl-empty { text-align: center; padding: 2.5rem 1rem !important; color: #8a82a0; }
+
+    /* Tombol aksi */
+    .kl-actions {
+        display: flex;
+        align-items: center;
+        gap: .5rem;
+        flex-wrap: wrap;
+    }
+    .kl-action {
+        display: inline-block;
+        padding: .45rem .8rem;
+        border-radius: 8px;
+        font-size: .85rem;
+        font-weight: 600;
+        text-decoration: none;
+        border: none;
+        cursor: pointer;
+    }
+    .kl-detail { background: #dbeafe; color: #1d4ed8; }
+    .kl-edit { background: #fef3c7; color: #92400e; }
+    .kl-delete { background: #fee2e2; color: #991b1b; }
+    .alert-success {
+    background: #ede9fe !important;
+    color: #5b21b6 !important;
+    border: 1px solid #c4b5fd !important;
+    border-radius: 12px;
+    padding: 16px 20px;
+    font-weight: 600;
+}
 </style>
 
 <div>
@@ -90,6 +120,7 @@
                         <th>Kuota</th>
                         <th>Mulai</th>
                         <th>Status</th>
+                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -105,10 +136,39 @@
                                     {{ ucfirst($course->status) }}
                                 </span>
                             </td>
+                            <td>
+                                <div class="kl-actions">
+                                    {{-- Tombol Detail --}}
+                                    <a href="{{ route('courses.show', $course) }}"
+                                       class="kl-action kl-detail">
+                                        Detail
+                                    </a>
+
+                                    {{-- Tombol Edit --}}
+                                    <a href="{{ route('courses.edit', $course) }}"
+                                       class="kl-action kl-edit">
+                                        Edit
+                                    </a>
+
+                                    {{-- Tombol Hapus --}}
+                                    <form method="POST"
+                                          action="{{ route('courses.destroy', $course) }}"
+                                          onsubmit="return confirm('Hapus kursus ini?')">
+                                        @csrf
+                                        @method('DELETE')
+
+                                        <button type="submit" class="kl-action kl-delete">
+                                            Hapus
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="6" class="kl-empty">Belum ada data kursus.</td>
+                            <td colspan="7" class="kl-empty">
+                                Belum ada data kursus.
+                            </td>
                         </tr>
                     @endforelse
                 </tbody>

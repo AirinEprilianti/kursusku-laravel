@@ -1,101 +1,289 @@
+
 @extends('layouts.app')
 
-@section('title', 'Pendaftaran Kursus')
+@section('title', 'Tambah Enrollment')
 
 @section('content')
-<div class="row justify-content-center">
-    <div class="col-lg-8">
-        <div class="card shadow-sm">
-            <div class="card-body p-4">
 
-                <h1 class="h3 mb-3">Pendaftaran Kursus</h1>
+<div class="enroll-page">
+    <div class="enroll-container">
 
-                <p class="text-secondary">
-                    Pilih kursus. Jumlah kursi akan dicek
-                    tanpa reload halaman.
-                </p>
+        <a href="{{ route('enrollments.index') }}"
+           class="enroll-back">
+            ← Kembali ke Laporan
+        </a>
 
-                <form method="POST"
-                      action="{{ route('enrollments.preview') }}">
-                    @csrf
+        <h2 class="enroll-heading">Tambah Enrollment</h2>
 
-                    <div class="mb-3">
-                        <label for="name" class="form-label">
-                            Nama
-                        </label>
+        <p class="enroll-subtitle">
+            Daftarkan peserta ke program kursus pilihan di KursusKu.
+        </p>
 
-                        <input
-                            type="text"
-                            id="name"
-                            name="name"
-                            value="{{ old('name') }}"
-                            class="form-control"
-                            minlength="3"
-                            maxlength="100"
-                            required>
-                    </div>
+        <div class="enroll-card">
 
-                    <div class="mb-3">
-                        <label for="email" class="form-label">
-                            Email
-                        </label>
+            <div class="enroll-icon">📚</div>
 
-                        <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            value="{{ old('email') }}"
-                            class="form-control"
-                            required>
-                    </div>
+            <h3>Form Pendaftaran Kursus</h3>
 
-                    <div class="mb-3">
-                        <label for="course_id" class="form-label">
-                            Pilih Kursus
-                        </label>
+            <p class="enroll-description">
+                Lengkapi informasi peserta dan pilih kursus yang ingin diikuti.
+            </p>
 
-                        <select
-                            id="course_id"
-                            name="course_id"
-                            class="form-select"
+            @if ($errors->any())
+                <div class="enroll-alert">
+                    <strong>Data belum dapat disimpan.</strong>
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            <form method="POST"
+                  action="{{ route('enrollments.store') }}">
+                @csrf
+
+                <div class="enroll-field">
+                    <label for="participant_id" class="enroll-label">
+                        Nama Participant
+                    </label>
+
+                    <select name="participant_id"
+                            id="participant_id"
+                            class="enroll-select"
                             required>
 
-                            <option value="">
-                                -- pilih kursus --
+                        <option value="">
+                            -- Pilih Participant --
+                        </option>
+
+                        @foreach ($participants as $participant)
+                            <option value="{{ $participant->id }}"
+                                @selected(old('participant_id') == $participant->id)>
+                                {{ $participant->name }} -
+                                {{ $participant->email }}
                             </option>
+                        @endforeach
 
-                            @foreach ($courses as $id => $course)
-                                <option
-                                    value="{{ $id }}"
-                                    @selected(old('course_id') == $id)>
-                                    {{ $course['name'] }}
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>
+                    </select>
 
-                    <div id="availability"
-                         class="alert alert-secondary">
-                        Pilih kursus untuk melihat sisa kursi.
-                    </div>
+                    @error('participant_id')
+                        <div class="enroll-error">{{ $message }}</div>
+                    @enderror
+                </div>
 
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul class="mb-0">
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
+                <div class="enroll-field">
+                    <label for="course_id" class="enroll-label">
+                        Program Kursus
+                    </label>
 
-                    <button class="btn btn-success" type="submit">
-                        Kirim Pendaftaran
+                    <select name="course_id"
+                            id="course_id"
+                            class="enroll-select"
+                            required>
+
+                        <option value="">
+                            -- Pilih Course --
+                        </option>
+
+                        @foreach ($courses as $course)
+                            <option value="{{ $course->id }}"
+                                @selected(old('course_id') == $course->id)>
+                                {{ $course->code }} - {{ $course->name }}
+                            </option>
+                        @endforeach
+
+                    </select>
+
+                    @error('course_id')
+                        <div class="enroll-error">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="enroll-actions">
+
+                    <a href="{{ route('enrollments.index') }}"
+                       class="enroll-btn enroll-btn-secondary">
+                        Batal
+                    </a>
+
+                    <button type="submit"
+                            class="enroll-btn enroll-btn-primary">
+                        Simpan Enrollment
                     </button>
 
-                </form>
-            </div>
+                </div>
+
+            </form>
         </div>
+
     </div>
 </div>
+
 @endsection
+
+<style>
+.enroll-page {
+    background: #f8f6ff;
+    min-height: 85vh;
+    padding: 55px 20px;
+    color: #291653;
+}
+
+.enroll-container {
+    max-width: 850px;
+    margin: auto;
+}
+
+.enroll-back {
+    color: #7c3aed;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.enroll-back:hover {
+    color: #5b21b6;
+}
+
+.enroll-heading {
+    font-size: 30px;
+    font-weight: 800;
+    margin: 22px 0 8px;
+}
+
+.enroll-subtitle {
+    color: #77718a;
+    margin-bottom: 30px;
+}
+
+.enroll-card {
+    background: white;
+    border: 1px solid #e9ddff;
+    border-radius: 22px;
+    padding: 38px;
+    box-shadow: 0 12px 35px rgba(91, 33, 182, .07);
+}
+
+.enroll-icon {
+    width: 65px;
+    height: 65px;
+    border-radius: 20px;
+    background: #f0e8ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+.enroll-card h3 {
+    font-size: 23px;
+    font-weight: 750;
+    margin-bottom: 8px;
+}
+
+.enroll-description {
+    color: #898399;
+    margin-bottom: 30px;
+}
+
+.enroll-label {
+    display: block;
+    font-weight: 650;
+    margin-bottom: 10px;
+    color: #34205c;
+}
+
+.enroll-select {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid #ded5ee;
+    border-radius: 12px;
+    background: #fff;
+    color: #35245a;
+    font-size: 15px;
+    outline: none;
+    transition: .2s;
+}
+
+.enroll-select:focus {
+    border-color: #8b5cf6;
+    box-shadow: 0 0 0 4px rgba(124, 58, 237, .12);
+}
+
+.enroll-field {
+    margin-bottom: 25px;
+}
+
+.enroll-error {
+    color: #dc2626;
+    font-size: 13px;
+    margin-top: 7px;
+}
+
+.enroll-alert {
+    background: #fff0f0;
+    border: 1px solid #fecaca;
+    color: #b91c1c;
+    border-radius: 12px;
+    padding: 15px 18px;
+    margin-bottom: 24px;
+}
+
+.enroll-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 32px;
+}
+
+.enroll-btn {
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    border: none;
+    border-radius: 12px;
+    padding: 14px 23px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.enroll-btn-primary {
+    background: linear-gradient(135deg, #7c3aed, #9255f5);
+    color: white;
+    flex: 1;
+    box-shadow: 0 7px 18px rgba(124, 58, 237, .2);
+}
+
+.enroll-btn-primary:hover {
+    background: #6d28d9;
+    color: white;
+    transform: translateY(-2px);
+}
+
+.enroll-btn-secondary {
+    background: #f3effb;
+    color: #60418e;
+}
+
+.enroll-btn-secondary:hover {
+    background: #e9ddff;
+    color: #4c1d95;
+}
+
+@media(max-width: 600px) {
+    .enroll-card {
+        padding: 24px 20px;
+    }
+
+    .enroll-heading {
+        font-size: 25px;
+    }
+
+    .enroll-actions {
+        flex-direction: column;
+    }
+}
+</style>
